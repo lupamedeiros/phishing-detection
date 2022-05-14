@@ -1,0 +1,5 @@
+name: phishing-detection
+channels:
+  - conda-forge
+  - defaults
+dependencies:
