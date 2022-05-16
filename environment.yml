@@ -4,3 +4,6 @@ channels:
   - defaults
 dependencies:
  - python=3.8
+ - wandb=0.12.16
+ - pip=21.2.4
+ - jupyter=4.6.3
