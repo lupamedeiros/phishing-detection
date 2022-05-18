@@ -1,3 +1,5 @@
 wandb
 pandas
 pandas-profiling==3.1.0
+pytest
+pytest-sugar
