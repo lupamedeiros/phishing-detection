@@ -4,14 +4,13 @@ import pandas as pd
 
 # This is global so all tests are collected under the same run
 
-run = wandb.init(project="phishing-detection", job_type="data_checks")
+run = wandb.init(project="phishing-detection",job_type="data_checks")
 
 @pytest.fixture(scope="session")
 def data():
 
     local_path = run.use_artifact("phishing-detection/preprocessed_data.csv:latest")
-    print(local_path)
-    df = pd.read_csv(local_path)
+    df = pd.read_csv(local_path.file())
 
     return df
 
@@ -67,8 +66,8 @@ def test_column_presence_and_type(data):
         "nb_dslash": pd.api.types.is_int64_dtype,
         "http_in_path": pd.api.types.is_int64_dtype,
         "https_token": pd.api.types.is_int64_dtype,
-        "ratio_digits_url": pd.api.types.is_float64_dtype,
-        "ratio_digits_host": pd.api.types.is_float64_dtype,
+        "ratio_digits_url": pd.api.types.is_float_dtype,
+        "ratio_digits_host": pd.api.types.is_float_dtype,
         "punycode": pd.api.types.is_int64_dtype,
         "port": pd.api.types.is_int64_dtype,
         "tld_in_path": pd.api.types.is_int64_dtype,
@@ -84,14 +83,14 @@ def test_column_presence_and_type(data):
         "length_words_raw": pd.api.types.is_int64_dtype,
         "char_repeat": pd.api.types.is_int64_dtype,
         "shortest_words_raw": pd.api.types.is_int64_dtype,
-        "shortest_words_host": pd.api.types.is_int64_dtype,
-        "shortest_words_path": pd.api.types.is_int64_dtype,
+        "shortest_word_host": pd.api.types.is_int64_dtype,
+        "shortest_word_path": pd.api.types.is_int64_dtype,
         "longest_words_raw": pd.api.types.is_int64_dtype,
-        "longest_words_host": pd.api.types.is_int64_dtype,
-        "longest_words_path": pd.api.types.is_int64_dtype,
-        "avg_words_raw": pd.api.types.is_float64_dtype,
-        "avg_word_host": pd.api.types.is_float64_dtype,
-        "avg_word_path": pd.api.types.is_float64_dtype,
+        "longest_word_host": pd.api.types.is_int64_dtype,
+        "longest_word_path": pd.api.types.is_int64_dtype,
+        "avg_words_raw": pd.api.types.is_float_dtype,
+        "avg_word_host": pd.api.types.is_float_dtype,
+        "avg_word_path": pd.api.types.is_float_dtype,
         "phish_hints": pd.api.types.is_int64_dtype,
         "domain_in_brand": pd.api.types.is_int64_dtype,
         "brand_in_subdomain": pd.api.types.is_int64_dtype,
@@ -99,24 +98,24 @@ def test_column_presence_and_type(data):
         "suspecious_tld": pd.api.types.is_int64_dtype,
         "statistical_report": pd.api.types.is_int64_dtype,
         "nb_hyperlinks": pd.api.types.is_int64_dtype,
-        "ratio_intHyperlinks": pd.api.types.is_float64_dtype,
-        "ratio_extHyperlinks": pd.api.types.is_float64_dtype,
+        "ratio_intHyperlinks": pd.api.types.is_float_dtype,
+        "ratio_extHyperlinks": pd.api.types.is_float_dtype,
         "ratio_nullHyperlinks": pd.api.types.is_int64_dtype,
         "nb_extCSS": pd.api.types.is_int64_dtype,
         "ratio_intRedirection": pd.api.types.is_int64_dtype,
-        "ratio_extRedirection": pd.api.types.is_float64_dtype,
+        "ratio_extRedirection": pd.api.types.is_float_dtype,
         "ratio_intErrors": pd.api.types.is_int64_dtype,
-        "ratio_extErrors": pd.api.types.is_float64_dtype,
+        "ratio_extErrors": pd.api.types.is_float_dtype,
         "login_form": pd.api.types.is_int64_dtype,
         "external_favicon": pd.api.types.is_int64_dtype,
-        "link_in_tags": pd.api.types.is_float64_dtype,
+        "links_in_tags": pd.api.types.is_float_dtype,
         "submit_email": pd.api.types.is_int64_dtype,
-        "ratio_intMedia": pd.api.types.is_float64_dtype,
-        "ratio_extMedia": pd.api.types.is_float64_dtype,
+        "ratio_intMedia": pd.api.types.is_float_dtype,
+        "ratio_extMedia": pd.api.types.is_float_dtype,
         "sfh": pd.api.types.is_int64_dtype,
         "iframe": pd.api.types.is_int64_dtype,
         "popup_window": pd.api.types.is_int64_dtype,
-        "safe_anchor": pd.api.types.is_float64_dtype,
+        "safe_anchor": pd.api.types.is_float_dtype,
         "onmouseover": pd.api.types.is_int64_dtype,
         "right_clic": pd.api.types.is_int64_dtype,
         "empty_title": pd.api.types.is_int64_dtype,
@@ -138,5 +137,6 @@ def test_column_presence_and_type(data):
     # Check data type
     for col_name, format_verification_funct in required_columns.items():
         assert format_verification_funct(data[col_name]), f"Column {col_name} failed test {format_verification_funct}"
+
 
 run.finish()
