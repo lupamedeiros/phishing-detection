@@ -7,3 +7,9 @@ dependencies:
  - wandb=0.12.16
  - pip=21.2.4
  - jupyter=4.6.3
+ - ipykernel
+ - pandas
+ - promise
+ - protobuf
+ - psutil
+ - pathtools
