@@ -13,3 +13,4 @@ dependencies:
  - protobuf
  - psutil
  - pathtools
+ - uvicorn

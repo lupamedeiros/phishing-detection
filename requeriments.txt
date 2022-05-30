@@ -4,8 +4,4 @@ pandas-profiling==3.1.0
 pytest
 pytest-sugar
 scikit-learn
-sentry-sdk
-shortuuid
-promise
-google
-google-api-python-client
+fastapi
