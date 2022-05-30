@@ -5,3 +5,7 @@ pytest
 pytest-sugar
 scikit-learn
 fastapi
+pydantic
+editdistance
+python-Levenshtein
+python-whois
