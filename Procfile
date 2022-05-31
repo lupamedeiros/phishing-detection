@@ -1,1 +1,1 @@
-web: uvicorn source.api.main:app
+web: uvicorn source.api.main:app --host=0.0.0.0 --port=${-5000}
