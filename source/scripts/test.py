@@ -1,27 +1,28 @@
-import content_features as ctnfe
-import url_features as urlfe
 import external_features as trdfe
-import feature_extractor as featex
-import ml_models as models
 import pandas as pd 
-import urllib.parse
+import urllib
 import tldextract
-import requests
-import json
-import csv
-import os
-import re
-
-
-from pandas2arff import pandas2arff
-from urllib.parse import urlparse
-from bs4 import BeautifulSoup
 
 key = 'Add your OPR API key here'
 
 import signal
 
+def get_domain(url):
+    o = urllib.parse.urlsplit(url)
+    return o.hostname, tldextract.extract(url).domain, o.path
+
 if __name__=="__main__":
     url = "https://portal.ifrn.edu.br/campus/natalzonanorte/noticias/ifrn-divulga-1-196-vagas-para-cursos-tecnicos-subsequentes-ainda-em-2022"
-    row = featex.extract_features(url, "?")
+    hostname, domain, path = get_domain(url)
+    extracted_domain = tldextract.extract(url)
+    domain = extracted_domain.domain+'.'+extracted_domain.suffix
+    row = {
+        "whois_registered_domain": trdfe.whois_registered_domain(domain),
+        "domain_registration_length": trdfe.domain_registration_length(domain),
+        "domain_age": trdfe.domain_age(domain),
+        "web_traffic": trdfe.web_traffic(url),
+        "dns_record": trdfe.dns_record(domain),
+        "google_index": trdfe.google_index(url)#,
+        #"page_rank": trdfe.page_rank(key,domain)
+    }
     print(row)
