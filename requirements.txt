@@ -11,3 +11,4 @@ python-Levenshtein
 python-whois
 tldextract
 dnspython
+uvicorn
