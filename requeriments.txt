@@ -10,3 +10,4 @@ editdistance
 python-Levenshtein
 python-whois
 tldextract
+dnspython

@@ -3,7 +3,7 @@ import pandas as pd
 import urllib
 import tldextract
 
-key = 'Add your OPR API key here'
+key = '4gkgsoooswoks8www8gok4oc8csw4k0g4ok0g8so'
 
 import signal
 
@@ -19,10 +19,9 @@ if __name__=="__main__":
     row = {
         "whois_registered_domain": trdfe.whois_registered_domain(domain),
         "domain_registration_length": trdfe.domain_registration_length(domain),
-        "domain_age": trdfe.domain_age(domain),
         "web_traffic": trdfe.web_traffic(url),
         "dns_record": trdfe.dns_record(domain),
-        "google_index": trdfe.google_index(url)#,
-        #"page_rank": trdfe.page_rank(key,domain)
+        "google_index": trdfe.google_index(url),
+        "page_rank": trdfe.page_rank(key,domain)
     }
     print(row)
